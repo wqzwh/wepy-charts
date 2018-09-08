@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"appid": "wxc85eb92066ddc4a5",
+	"appid": "wx5db8cf3c952e4b47",
 	"projectname": "wepy-echarts",
 	"miniprogramRoot": "./dist",
 	"libVersion": "2.2.3",
