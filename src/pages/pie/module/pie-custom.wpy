@@ -1,0 +1,100 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="PieCustom" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy';
+import * as ec from '@/plugins/ec-canvas/echarts';
+import { EChartsMixin } from '@/mixins';
+import Tooltip from '@/components/tooltip';
+class PieCustom extends wepy.component {
+  components = {
+    Tooltip
+  };
+
+  mixins = [EChartsMixin];
+
+  data = {
+    canvasId: 'PieCustom',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      title: {
+        text: 'Customized Pie',
+        left: 'center',
+      },
+
+      tooltip: {
+        trigger: 'item',
+      },
+
+      visualMap: {
+        show: false,
+        min: 80,
+        max: 600,
+        inRange: {
+          colorLightness: [0, 1]
+        }
+      },
+      series: [
+        {
+          name: '访问来源',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '50%'],
+          data: [
+            { value: 335, name: '直接访问' },
+            { value: 310, name: '邮件营销' },
+            { value: 274, name: '联盟广告' },
+            { value: 235, name: '视频广告' },
+            { value: 400, name: '搜索引擎' }
+          ].sort(function(a, b) {
+            return a.value - b.value;
+          }),
+          roseType: 'radius',
+          labelLine: {
+            normal: {
+              smooth: 0.2,
+              length: 10,
+              length2: 20
+            }
+          },
+          animationType: 'scale',
+          animationEasing: 'elasticOut',
+          animationDelay: function(idx) {
+            return Math.random() * 200;
+          }
+        }
+      ]
+    };
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default PieCustom;
+</script>
+<style lang="less" scoped>
+</style>

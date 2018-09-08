@@ -1,0 +1,81 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="BarBasic" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy'
+import * as ec from '@/plugins/ec-canvas/echarts'
+import { EChartsMixin } from '@/mixins'
+import Tooltip from '@/components/tooltip'
+class BarBasic extends wepy.component {
+  components = {
+    Tooltip
+  }
+  
+  mixins = [EChartsMixin];
+
+  data = {
+    canvasId: 'BarBasic',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      title: {
+        text: '基础使用'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      grid: {
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        axisPointer:{
+          label:{
+            formatter:(d) => {
+              self.tooltip = d.seriesData
+              self.$apply()
+            }
+          }
+        }
+      },
+      yAxis: {
+          type: 'value'
+      },
+      series: [{
+          data: [120, 200, 150, 80, 70, 110, 130],
+          type: 'bar'
+      }]
+    }
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default BarBasic;
+</script>
+<style lang="less" scoped>
+</style>

@@ -1,0 +1,72 @@
+<template>
+  <view class="panel">
+    <repeat for="{{charts}}" key="index" index="index" item="item">
+      <view class="chart-with-img">
+        <image src="../../assets/img/icons/{{item.id}}.png" mode="aspectFit" @tap="open" data-chart="{{item}}"/>
+        {{item.name}}
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页',
+  };
+
+  data = {
+    charts: [{
+      id: 'bar',
+      name: '柱状图'
+    }, {
+      id: 'line',
+      name: '折线图'
+    }, {
+      id: 'pie',
+      name: '饼图'
+    }],
+  }
+
+  methods = {
+    open(e) {
+      wx.navigateTo({
+        url: '/pages/' + e.target.dataset.chart.id + '/index'
+      });
+    }
+  }
+}
+
+export default Index;
+</script>
+<style lang="less" scoped>
+.panel {
+  display: block;
+  margin-top: 10rpx;
+}
+
+.panel .chart-with-img {
+  display: inline-block;
+  width: 25%;
+  margin: 10rpx 4%;
+  text-align: center;
+}
+
+.chart-with-img image {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100rpx; 
+  padding: 20rpx;
+  background-color: #f3f3f3;
+  border: 1rpx solid #eee;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10rpx;
+}
+</style>
+
+
+
+
+

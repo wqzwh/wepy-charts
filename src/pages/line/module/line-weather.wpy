@@ -1,0 +1,135 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="weather" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy';
+import * as ec from '@/plugins/ec-canvas/echarts';
+import { EChartsMixin } from '@/mixins';
+import Tooltip from '@/components/tooltip';
+class LineWeather extends wepy.component {
+  mixins = [EChartsMixin];
+
+  components = {
+    Tooltip
+  };
+
+  data = {
+    canvasId: 'weather',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      title: {
+        text: '气温变化'
+      },
+      grid: {
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['最高气温', '最低气温']
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        axisPointer: {
+          label: {
+            formatter: d => {
+              self.tooltip = d.seriesData;
+              self.$apply();
+            }
+          }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: {
+          formatter: '{value} °C'
+        }
+      },
+      series: [
+        {
+          name: '最高气温',
+          type: 'line',
+          data: [11, 11, 15, 13, 12, 13, 10],
+          markPoint: {
+            data: [
+              { type: 'max', name: '最大值' },
+              { type: 'min', name: '最小值' }
+            ]
+          },
+          markLine: {
+            data: [{ type: 'average', name: '平均值' }]
+          }
+        },
+        {
+          name: '最低气温',
+          type: 'line',
+          data: [1, -2, 2, 5, 3, 2, 0],
+          markPoint: {
+            data: [{ name: '周最低', value: -2, xAxis: 1, yAxis: -1.5 }]
+          },
+          markLine: {
+            data: [
+              { type: 'average', name: '平均值' },
+              [
+                {
+                  symbol: 'none',
+                  x: '90%',
+                  yAxis: 'max'
+                },
+                {
+                  symbol: 'circle',
+                  label: {
+                    normal: {
+                      position: 'start',
+                      formatter: '最大值'
+                    }
+                  },
+                  type: 'max',
+                  name: '最高点'
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    };
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default LineWeather;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

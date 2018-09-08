@@ -1,0 +1,67 @@
+<template>
+  <cover-view class="ec-tooltip" style="left: {{lx + 'px'}}; top: {{ly + 'px'}}" hidden="{{!tooltip.length}}">
+    <cover-view class="item-tooltip-name">
+      {{tooltip[0].name}}
+    </cover-view>
+    <repeat for="{{tooltip}}" key="index" index="index" item="item">
+      <cover-view class="item-tooltip-bd">
+        <cover-view class="item-tooltip-color item-tooltip" style="background: {{item.color}}"></cover-view>
+        <cover-view class="item-tooltip">{{item.seriesName}}: {{item.value}}</cover-view>
+      </cover-view>
+    </repeat>
+  </cover-view>
+</template>
+<script>
+import wepy from 'wepy'
+class tooltip extends wepy.component {
+  props = {
+    tooltip: Array,
+    default() {
+      return []
+    },
+    ly: {
+      type: [String, Number],
+      default: 0
+    },
+    lx: {
+      type: [String, Number],
+      default: 0
+    }
+  }
+}
+
+export default tooltip;
+</script>
+<style lang="less" scoped>
+.ec-tooltip {
+  position: absolute;
+  border-style: solid;
+  white-space: nowrap;
+  transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s, top 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0s;
+  background-color: rgba(50, 50, 50, 0.7);
+  border-width: 0rpx;
+  border-color: rgb(51, 51, 51);
+  border-radius: 4rpx;
+  color: rgb(255, 255, 255);
+  font-size:24rpx;
+  padding: 10rpx;
+
+  .item-tooltip {
+    display: inline-block;
+  }
+  .item-tooltip-bd {
+    display: flex;
+    align-items:center;
+  }
+  .item-tooltip-color{
+    margin-right: 10rpx;
+    border-radius: 10rpx;
+    width: 20rpx;
+    height: 20rpx;
+  }
+}
+</style>
+
+
+
+

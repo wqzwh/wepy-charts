@@ -1,0 +1,99 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="lineArea" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy'
+import * as ec from '@/plugins/ec-canvas/echarts'
+import { EChartsMixin } from '@/mixins'
+import Tooltip from '@/components/tooltip'
+class LineArea extends wepy.component {
+  components = {
+    Tooltip
+  }
+  
+  mixins = [EChartsMixin];
+
+  data = {
+    canvasId: 'lineArea',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      title: {
+        text: '堆叠区域图'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['邮件营销', '联盟广告']
+      },
+      grid: {
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        axisPointer:{
+          label:{
+            formatter:(d) => {
+              self.tooltip = d.seriesData
+              self.$apply()
+            }
+          }
+        }
+      },
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: '邮件营销',
+          type: 'line',
+          stack: '总量',
+          areaStyle: { normal: {} },
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: '联盟广告',
+          type: 'line',
+          stack: '总量',
+          areaStyle: { normal: {} },
+          data: [220, 182, 191, 234, 290, 330, 310]
+        }
+      ]
+    }
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default LineArea;
+</script>
+<style lang="less" scoped>
+</style>

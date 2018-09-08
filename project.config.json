@@ -1,0 +1,42 @@
+{
+	"description": "y",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wxc85eb92066ddc4a5",
+	"projectname": "wepy-echarts",
+	"miniprogramRoot": "./dist",
+	"libVersion": "2.2.3",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "line",
+					"pathName": "pages/line/index"
+				}
+			]
+		}
+	}
+}

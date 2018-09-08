@@ -1,0 +1,29 @@
+<template>
+  <view class='wrap'>
+    <PieBasic />
+    <PieCustom/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import PieBasic from './module/pie-basic'
+import PieCustom from './module/pie-custom'
+class Pie extends wepy.page {
+  config = {
+    navigationBarTitleText: '饼图',
+  };
+
+  components = {
+    PieBasic,
+    PieCustom
+  }
+}
+
+export default Pie;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+
