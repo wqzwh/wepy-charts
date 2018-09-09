@@ -1,8 +1,16 @@
 <template>
   <view class="panel">
-    <repeat for="{{charts}}" key="index" index="index" item="item">
+    <view class="title">Echarts</view>
+    <repeat for="{{echarts}}" key="index" index="index" item="item">
       <view class="chart-with-img">
-        <image src="../../assets/img/icons/{{item.id}}.png" mode="aspectFit" @tap="open" data-chart="{{item}}"/>
+        <image src="../../assets/eimg/{{item.id}}.png" mode="aspectFit" @tap="eopen" data-chart="{{item}}"/>
+        {{item.name}}
+      </view>
+    </repeat>
+    <view class="title">Antv-F2</view>
+    <repeat for="{{fcharts}}" key="index" index="index" item="item">
+      <view class="chart-with-img">
+        <image src="../../assets/fimg/{{item.id}}.png" mode="aspectFit" @tap="fopen" data-chart="{{item}}"/>
         {{item.name}}
       </view>
     </repeat>
@@ -17,7 +25,17 @@ class Index extends wepy.page {
   };
 
   data = {
-    charts: [{
+    echarts: [{
+      id: 'bar',
+      name: '柱状图'
+    }, {
+      id: 'line',
+      name: '折线图'
+    }, {
+      id: 'pie',
+      name: '饼图'
+    }],
+    fcharts: [{
       id: 'bar',
       name: '柱状图'
     }, {
@@ -30,9 +48,14 @@ class Index extends wepy.page {
   }
 
   methods = {
-    open(e) {
+    eopen(e) {
       wx.navigateTo({
-        url: '/pages/' + e.target.dataset.chart.id + '/index'
+        url: '/pages/e/' + e.target.dataset.chart.id + '/index'
+      });
+    },
+    fopen(e) {
+      wx.navigateTo({
+        url: '/pages/f/' + e.target.dataset.chart.id + '/index'
       });
     }
   }
@@ -63,6 +86,11 @@ export default Index;
   display: block;
   margin: 0 auto;
   margin-bottom: 10rpx;
+}
+
+.title {
+  text-align: center;
+  margin: 30rpx 0;
 }
 </style>
 

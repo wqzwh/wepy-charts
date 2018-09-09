@@ -1,0 +1,161 @@
+<template>
+<view>
+  <view>组使用</view>
+  <canvas
+    class="f2-canvas"
+    canvas-id="BarGroup"
+    @init="init"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @longtap="press">
+  </canvas>
+</view>  
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+import _ from 'lodash';
+let chart = null;
+class BarGroup extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'BarGroup',
+    opts: {
+      onInit: this.initChart
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    let data = [
+      {
+        label: 'Mon.',
+        type: 'series1',
+        value: 2800
+      },
+      {
+        label: 'Mon.',
+        type: 'series2',
+        value: 2260
+      },
+      {
+        label: 'Tue.',
+        type: 'series1',
+        value: 1800
+      },
+      {
+        label: 'Tue.',
+        type: 'series2',
+        value: 1300
+      },
+      {
+        label: 'Wed.',
+        type: 'series1',
+        value: 950
+      },
+      {
+        label: 'Wed.',
+        type: 'series2',
+        value: 900
+      },
+      {
+        label: 'Thu.',
+        type: 'series1',
+        value: 500
+      },
+      {
+        label: 'Thu.',
+        type: 'series2',
+        value: 390
+      },
+      {
+        label: 'Fri.',
+        type: 'series1',
+        value: 170
+      },
+      {
+        label: 'Fri.',
+        type: 'series2',
+        value: 100
+      }
+    ];
+
+    chart.source(data.reverse(), {
+      value: {
+        tickInterval: 750
+      }
+    });
+    chart.coord({
+      transposed: true
+    });
+    chart.tooltip({
+      custom: true, // 自定义 tooltip 内容框
+      onChange: function onChange(obj) {
+        var legend = chart.get('legendController').legends.top[0];
+        var tooltipItems = obj.items;
+        var legendItems = legend.items;
+        var map = {};
+        legendItems.map(function(item) {
+          map[item.name] = _.clone(item);
+        });
+        tooltipItems.map(function(item) {
+          var name = item.name;
+          var value = item.value;
+          if (map[name]) {
+            map[name].value = value;
+          }
+        });
+        legend.setItems(_.values(map));
+      },
+      onHide: function onHide() {
+        var legend = chart.get('legendController').legends.top[0];
+        legend.setItems(chart.getLegendItems().country);
+      }
+    });
+    chart.axis('label', {
+      line: F2.Global._defaultAxis.line,
+      grid: null
+    });
+    chart.axis('value', {
+      line: null,
+      grid: F2.Global._defaultAxis.grid,
+      label: function label(text, index, total) {
+        var textCfg = {};
+        if (index === 0) {
+          textCfg.textAlign = 'left';
+        } else if (index === total - 1) {
+          textCfg.textAlign = 'right';
+        }
+        return textCfg;
+      }
+    });
+    chart
+      .interval()
+      .position('label*value')
+      .color('type')
+      .adjust({
+        type: 'dodge',
+        marginRatio: 1 / 32
+      });
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default BarGroup;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

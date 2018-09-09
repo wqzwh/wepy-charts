@@ -1,0 +1,204 @@
+<template>
+  <view>
+    <view>多线</view>
+    <canvas
+      class="f2-canvas"
+      canvas-id="LineMore"
+      @init="init"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @longtap="press">
+    </canvas>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+import _ from 'lodash';
+let chart = null;
+class LineMore extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'LineMore',
+    opts: {
+      onInit: this.initChart
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    let data = [
+      {
+        country: 'Asia',
+        year: '1750',
+        value: 1502
+      },
+      {
+        country: 'Asia',
+        year: '1800',
+        value: 1635
+      },
+      {
+        country: 'Asia',
+        year: '1850',
+        value: 1809
+      },
+      {
+        country: 'Asia',
+        year: '1900',
+        value: 5268
+      },
+      {
+        country: 'Asia',
+        year: '1950',
+        value: 2400
+      },
+      {
+        country: 'Asia',
+        year: '1999',
+        value: 3634
+      },
+      {
+        country: 'Asia',
+        year: '2050',
+        value: 1947
+      },
+      {
+        country: 'Africa',
+        year: '1750',
+        value: 1106
+      },
+      {
+        country: 'Africa',
+        year: '1800',
+        value: 1107
+      },
+      {
+        country: 'Africa',
+        year: '1850',
+        value: 1011
+      },
+      {
+        country: 'Africa',
+        year: '1900',
+        value: 1266
+      },
+      {
+        country: 'Africa',
+        year: '1950',
+        value: 1221
+      },
+      {
+        country: 'Africa',
+        year: '1999',
+        value: 767
+      },
+      {
+        country: 'Africa',
+        year: '2050',
+        value: 1330
+      },
+      {
+        country: 'Oceania',
+        year: '1750',
+        value: 1200
+      },
+      {
+        country: 'Oceania',
+        year: '1800',
+        value: 1200
+      },
+      {
+        country: 'Oceania',
+        year: '1850',
+        value: 2000
+      },
+      {
+        country: 'Oceania',
+        year: '1900',
+        value: 460
+      },
+      {
+        country: 'Oceania',
+        year: '1950',
+        value: 530
+      },
+      {
+        country: 'Oceania',
+        year: '1999',
+        value: 300
+      },
+      {
+        country: 'Oceania',
+        year: '2050',
+        value: 800
+      }
+    ];
+
+    chart.source(data, {
+      year: {
+        range: [0, 1]
+      }
+    });
+    chart.tooltip({
+      showCrosshairs: true,
+      custom: true,
+      onChange: function onChange(obj) {
+        var legend = chart.get('legendController').legends.top[0];
+        var tooltipItems = obj.items;
+        var legendItems = legend.items;
+        var map = {};
+        legendItems.map(function(item) {
+          map[item.name] = _.clone(item);
+        });
+        tooltipItems.map(function(item) {
+          var name = item.name;
+          var value = item.value;
+          if (map[name]) {
+            map[name].value = value;
+          }
+        });
+        legend.setItems(_.values(map));
+      },
+      onHide: function onHide() {
+        var legend = chart.get('legendController').legends.top[0];
+        legend.setItems(chart.getLegendItems().country);
+      }
+    });
+    chart
+      .area()
+      .position('year*value')
+      .color('country')
+      .adjust('stack');
+    chart
+      .line()
+      .position('year*value')
+      .color('country')
+      .size(2)
+      .adjust('stack');
+    chart
+      .point()
+      .position('year*value')
+      .color('country')
+      .adjust('stack');
+    chart.render();
+    return chart;
+  }
+}
+
+export default LineMore;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

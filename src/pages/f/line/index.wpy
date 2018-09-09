@@ -1,0 +1,32 @@
+<template>
+  <view class='wrap'>
+    <LineFirst />
+    <LineArea/>
+    <LineMore/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import LineFirst from './module/line-first'
+import LineArea from './module/line-area'
+import LineMore from './module/line-more'
+class Line extends wepy.page {
+  config = {
+    navigationBarTitleText: '折线图',
+  };
+
+  components = {
+    LineFirst,
+    LineArea,
+    LineMore
+  }
+}
+
+export default Line;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

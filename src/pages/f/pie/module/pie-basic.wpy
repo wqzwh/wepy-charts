@@ -1,0 +1,133 @@
+<template>
+  <view>
+    <view>基础使用</view>
+    <canvas
+      class="f2-canvas"
+      canvas-id="PieBasic"
+      @init="init"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @longtap="press">
+    </canvas>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+let chart = null;
+class PieBasic extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'PieBasic',
+    opts: {
+      onInit: this.initChart
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    let map = {
+      芳华: '40%',
+      妖猫传: '20%',
+      机器之血: '18%',
+      心理罪: '15%',
+      寻梦环游记: '5%',
+      其他: '2%'
+    };
+    let data = [
+      {
+        name: '芳华',
+        percent: 0.4,
+        a: '1'
+      },
+      {
+        name: '妖猫传',
+        percent: 0.2,
+        a: '1'
+      },
+      {
+        name: '机器之血',
+        percent: 0.18,
+        a: '1'
+      },
+      {
+        name: '心理罪',
+        percent: 0.15,
+        a: '1'
+      },
+      {
+        name: '寻梦环游记',
+        percent: 0.05,
+        a: '1'
+      },
+      {
+        name: '其他',
+        percent: 0.02,
+        a: '1'
+      }
+    ];
+    chart.source(data, {
+      percent: {
+        formatter: function formatter(val) {
+          return val * 100 + '%';
+        }
+      }
+    });
+    chart.legend({
+      position: 'right',
+      itemFormatter: function itemFormatter(val) {
+        return val + '  ' + map[val];
+      }
+    });
+    chart.tooltip(false);
+    chart.coord('polar', {
+      transposed: true,
+      radius: 0.85
+    });
+    chart.axis(false);
+    chart
+      .interval()
+      .position('a*percent')
+      .color('name', [
+        '#1890FF',
+        '#13C2C2',
+        '#2FC25B',
+        '#FACC14',
+        '#F04864',
+        '#8543E0'
+      ])
+      .adjust('stack')
+      .style({
+        lineWidth: 1,
+        stroke: '#fff',
+        lineJoin: 'round',
+        lineCap: 'round'
+      })
+      .animate({
+        appear: {
+          duration: 1200,
+          easing: 'bounceOut'
+        }
+      });
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default PieBasic;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

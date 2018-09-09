@@ -1,0 +1,35 @@
+<template>
+  <view class='wrap'>
+    <BarBasic />
+    <BarStacked />
+    <BarGroup/>
+    <BarGradient/>
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import BarBasic from './module/bar-basic'
+import BarStacked from './module/bar-stacked'
+import BarGroup from './module/bar-group'
+import BarGradient from './module/bar-gradient'
+class Bar extends wepy.page {
+  config = {
+    navigationBarTitleText: '柱状图',
+  };
+
+  components = {
+    BarBasic,
+    BarStacked,
+    BarGroup,
+    BarGradient
+  }
+}
+
+export default Bar
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

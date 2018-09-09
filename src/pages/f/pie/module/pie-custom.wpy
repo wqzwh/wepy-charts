@@ -1,0 +1,86 @@
+<template>
+  <view>
+    <view>玫瑰图</view>
+    <canvas
+      class="f2-canvas"
+      canvas-id="PieCustom"
+      @init="init"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @longtap="press">
+    </canvas>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+let chart = null;
+class PieCustom extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'PieCustom',
+    opts: {
+      onInit: this.initChart
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    let data = [
+      {
+        year: '2001',
+        population: 41.8
+      },
+      {
+        year: '2002',
+        population: 25.8
+      },
+      {
+        year: '2003',
+        population: 31.7
+      },
+      {
+        year: '2004',
+        population: 46
+      },
+      {
+        year: '2005',
+        population: 28
+      }
+    ];
+    chart.source(data);
+    chart.coord('polar');
+    chart.legend({
+      position: 'right'
+    });
+    chart.axis(false);
+    chart
+      .interval()
+      .position('year*population')
+      .color('year')
+      .style({
+        lineWidth: 1,
+        stroke: '#fff'
+      });
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default PieCustom;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

@@ -1,0 +1,97 @@
+<template>
+<view>
+  <view>渐变使用</view>
+  <canvas
+    class="f2-canvas"
+    canvas-id="BarGradient"
+    @init="init"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @longtap="press">
+  </canvas>
+</view>  
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+let chart = null;
+class BarGradient extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'BarGradient',
+    opts: {
+      onInit: this.initChart
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    let data = [
+      {
+        year: '2014 年',
+        sales: 145
+      },
+      {
+        year: '2015 年',
+        sales: 121
+      },
+      {
+        year: '2016 年',
+        sales: 100
+      },
+      {
+        year: '2017 年',
+        sales: 97
+      },
+      {
+        year: '2018 年',
+        sales: 85
+      }
+    ];
+
+    chart.source(data, {
+      sales: {
+        tickCount: 5
+      }
+    });
+    chart.tooltip({
+      showItemMarker: false,
+      onShow: function onShow(ev) {
+        let items = ev.items;
+        items[0].name = null;
+        items[0].name = items[0].title;
+        items[0].value = '¥ ' + items[0].value;
+      }
+    });
+
+    // 让柱状图的宽度适配不同的屏幕尺寸
+    const res = wx.getSystemInfoSync();
+    let barWidth = 36 * (res.screenWidth / 375);
+
+    chart
+      .interval()
+      .position('year*sales')
+      .color('l(90) 0:#1890ff 1:#70cdd0') // 定义柱状图渐变色
+      .size(barWidth);
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default BarGradient;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

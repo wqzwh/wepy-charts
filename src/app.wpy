@@ -5,9 +5,12 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index/index',
-      'pages/line/index',
-      'pages/bar/index',
-      'pages/pie/index',
+      'pages/e/line/index',
+      'pages/e/bar/index',
+      'pages/e/pie/index',
+      'pages/f/line/index',
+      'pages/f/bar/index',
+      'pages/f/pie/index',
     ],
     window: {
       backgroundTextStyle: 'light',
