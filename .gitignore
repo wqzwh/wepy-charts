@@ -7,6 +7,7 @@ yarn-error.log*
 target/
 .wepycache
 .wepyignore
+package-lock.json
 
 # Editor directories and files
 .idea
