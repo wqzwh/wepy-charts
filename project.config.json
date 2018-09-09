@@ -29,12 +29,24 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "line",
-					"pathName": "pages/line/index"
+					"pathName": "pages/line/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pie",
+					"pathName": "pages/pie/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "bar",
+					"pathName": "pages/bar/index"
 				}
 			]
 		}

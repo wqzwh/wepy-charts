@@ -11,16 +11,16 @@
   </canvas>
 </template>
 <script>
-import wepy from 'wepy';
-import * as ec from '@/plugins/ec-canvas/echarts';
-import { EChartsMixin } from '@/mixins';
-import Tooltip from '@/components/tooltip';
+import wepy from 'wepy'
+import * as ec from '@/plugins/ec-canvas/echarts'
+import { EChartsMixin } from '@/mixins'
+import Tooltip from '@/components/tooltip'
 class PieCustom extends wepy.component {
   components = {
     Tooltip
-  };
+  }
 
-  mixins = [EChartsMixin];
+  mixins = [EChartsMixin]
 
   data = {
     canvasId: 'PieCustom',
@@ -30,14 +30,14 @@ class PieCustom extends wepy.component {
     tooltip: [],
     lx: 0,
     ly: 0
-  };
+  }
 
   initChart(canvas, width, height, self) {
     const chart = ec.init(canvas, null, {
       width: width,
       height: height
-    });
-    canvas.setChart(chart);
+    })
+    canvas.setChart(chart)
 
     const option = {
       title: {
@@ -70,7 +70,7 @@ class PieCustom extends wepy.component {
             { value: 235, name: '视频广告' },
             { value: 400, name: '搜索引擎' }
           ].sort(function(a, b) {
-            return a.value - b.value;
+            return a.value - b.value
           }),
           roseType: 'radius',
           labelLine: {
@@ -80,21 +80,26 @@ class PieCustom extends wepy.component {
               length2: 20
             }
           },
+          label: {
+            formatter(d) {
+              return `${d.data.name}\n${d.data.value}`
+            }
+          },
           animationType: 'scale',
           animationEasing: 'elasticOut',
           animationDelay: function(idx) {
-            return Math.random() * 200;
+            return Math.random() * 200
           }
         }
       ]
-    };
+    }
 
-    chart.setOption(option);
-    return chart;
+    chart.setOption(option)
+    return chart
   }
 }
 
-export default PieCustom;
+export default PieCustom
 </script>
 <style lang="less" scoped>
 </style>

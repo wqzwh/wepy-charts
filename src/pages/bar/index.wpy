@@ -3,6 +3,7 @@
     <BarBasic />
     <BarLadder/>
     <BarStacked/>
+    <BarPolar/>
   </view>
 </template>
 <script>
@@ -10,6 +11,7 @@ import wepy from 'wepy'
 import BarBasic from './module/bar-basic'
 import BarLadder from './module/bar-ladder'
 import BarStacked from './module/bar-stacked'
+import BarPolar from './module/bar-polar'
 class Bar extends wepy.page {
   config = {
     navigationBarTitleText: '柱状图',
@@ -18,7 +20,8 @@ class Bar extends wepy.page {
   components = {
     BarBasic,
     BarLadder,
-    BarStacked
+    BarStacked,
+    BarPolar
   }
 }
 

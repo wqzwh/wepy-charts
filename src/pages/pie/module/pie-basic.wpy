@@ -11,16 +11,16 @@
   </canvas>
 </template>
 <script>
-import wepy from 'wepy';
-import * as ec from '@/plugins/ec-canvas/echarts';
-import { EChartsMixin } from '@/mixins';
-import Tooltip from '@/components/tooltip';
+import wepy from 'wepy'
+import * as ec from '@/plugins/ec-canvas/echarts'
+import { EChartsMixin } from '@/mixins'
+import Tooltip from '@/components/tooltip'
 class PieBasic extends wepy.component {
   components = {
     Tooltip
-  };
+  }
 
-  mixins = [EChartsMixin];
+  mixins = [EChartsMixin]
 
   data = {
     canvasId: 'PieBasic',
@@ -30,14 +30,14 @@ class PieBasic extends wepy.component {
     tooltip: [],
     lx: 0,
     ly: 0
-  };
+  }
 
   initChart(canvas, width, height, self) {
     const chart = ec.init(canvas, null, {
       width: width,
       height: height
-    });
-    canvas.setChart(chart);
+    })
+    canvas.setChart(chart)
 
     const option = {
       title: {
@@ -65,6 +65,11 @@ class PieBasic extends wepy.component {
             { value: 135, name: '视频广告' },
             { value: 1548, name: '搜索引擎' }
           ],
+          label: {
+            formatter(d) {
+              return `${d.data.name}\n${d.data.value}`
+            }
+          },
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -74,14 +79,14 @@ class PieBasic extends wepy.component {
           }
         }
       ]
-    };
+    }
 
-    chart.setOption(option);
-    return chart;
+    chart.setOption(option)
+    return chart
   }
 }
 
-export default PieBasic;
+export default PieBasic
 </script>
 <style lang="less" scoped>
 </style>

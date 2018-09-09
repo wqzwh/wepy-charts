@@ -1,8 +1,8 @@
 <template>
   <canvas 
     class="ec-canvas" 
-    canvas-id="line" 
-    style="width:100%;height:500rpx;display:block;"
+    canvas-id="BarPolar" 
+    style="width:100%;height:600rpx;display:block;"
     @touchstart="touchStart"
     @touchmove="touchMove"
     @touchend="touchEnd"
@@ -15,86 +15,81 @@ import wepy from 'wepy'
 import * as ec from '@/plugins/ec-canvas/echarts'
 import { EChartsMixin } from '@/mixins'
 import Tooltip from '@/components/tooltip'
-class LineFirst extends wepy.component {
-
-  mixins = [EChartsMixin]
-
+class BarPolar extends wepy.component {
   components = {
     Tooltip
   }
 
+  mixins = [EChartsMixin]
+
   data = {
-    canvasId: 'line',
+    canvasId: 'BarPolar',
     ec: {
       onInit: this.initChart
     },
     tooltip: [],
     lx: 0,
     ly: 0
-  };
+  }
 
   initChart(canvas, width, height, self) {
     const chart = ec.init(canvas, null, {
       width: width,
       height: height
-    });
+    })
     canvas.setChart(chart)
 
     const option = {
       title: {
-        text: '基础使用'
-      },
-      color: ["#37A2DA", "#67E0E3", "#9FE6B8"],
-      legend: {
-        data: ['A', 'B', 'C'],
-        left: 'center',
-        z: 100,
-      },
-      grid: {
-        containLabel: true
+        text: '极坐标系'
       },
       tooltip: {
-        show: true,
         trigger: 'axis'
       },
-      xAxis: {
+      angleAxis: {
         type: 'category',
-        boundaryGap: false,
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-        axisPointer:{
-          label:{
-            formatter:(d) => {
+        z: 10,
+        axisPointer: {
+          label: {
+            formatter: d => {
               self.tooltip = d.seriesData
               self.$apply()
             }
           }
-        },
-      },
-      yAxis: {
-        x: 'center',
-        type: 'value',
-        splitLine: {
-          lineStyle: {
-            type: 'dashed'
-          }
         }
       },
-      series: [{
-        name: 'A',
-        type: 'line',
-        smooth: true,
-        data: [18, 36, 65, 30, 78, 40, 33]
-      }, {
-        name: 'B',
-        type: 'line',
-        smooth: true,
-        data: [12, 50, 51, 35, 70, 30, 20]
-      }, {
-        name: 'C',
-        type: 'line',
-        smooth: true,
-        data: [10, 30, 31, 50, 40, 20, 10]
-      }]
+      radiusAxis: {},
+      polar: {},
+      series: [
+        {
+          type: 'bar',
+          data: [1, 2, 3, 4, 3, 5, 1],
+          coordinateSystem: 'polar',
+          name: 'A',
+          stack: 'a'
+        },
+        {
+          type: 'bar',
+          data: [2, 4, 6, 1, 3, 2, 1],
+          coordinateSystem: 'polar',
+          name: 'B',
+          stack: 'a'
+        },
+        {
+          type: 'bar',
+          data: [1, 2, 3, 4, 1, 2, 5],
+          coordinateSystem: 'polar',
+          name: 'C',
+          stack: 'a'
+        }
+      ],
+      legend: {
+        show: true,
+        data: ['A', 'B', 'C'],
+        x: 'right',
+        orient: 'vertical',
+      }
     }
 
     chart.setOption(option)
@@ -102,11 +97,7 @@ class LineFirst extends wepy.component {
   }
 }
 
-export default LineFirst
+export default BarPolar
 </script>
 <style lang="less" scoped>
 </style>
-
-
-
-

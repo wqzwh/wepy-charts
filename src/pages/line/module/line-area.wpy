@@ -20,7 +20,7 @@ class LineArea extends wepy.component {
     Tooltip
   }
   
-  mixins = [EChartsMixin];
+  mixins = [EChartsMixin]
 
   data = {
     canvasId: 'lineArea',
@@ -30,14 +30,14 @@ class LineArea extends wepy.component {
     tooltip: [],
     lx: 0,
     ly: 0
-  };
+  }
 
   initChart(canvas, width, height, self) {
     const chart = ec.init(canvas, null, {
       width: width,
       height: height
-    });
-    canvas.setChart(chart);
+    })
+    canvas.setChart(chart)
 
     const option = {
       title: {
@@ -88,12 +88,12 @@ class LineArea extends wepy.component {
       ]
     }
 
-    chart.setOption(option);
-    return chart;
+    chart.setOption(option)
+    return chart
   }
 }
 
-export default LineArea;
+export default LineArea
 </script>
 <style lang="less" scoped>
 </style>

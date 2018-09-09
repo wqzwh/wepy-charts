@@ -9,6 +9,7 @@ wepy工程框架结合echarts使用，展示基本图表示例，目前柱状图
 * 基础使用
 * 阶梯瀑布图
 * 堆叠图
+* 极坐标系图
 
 <img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/bar.gif?raw=true" style="max-width:100%;">
 

@@ -70,12 +70,12 @@ class BarBasic extends wepy.component {
       }]
     }
 
-    chart.setOption(option);
-    return chart;
+    chart.setOption(option)
+    return chart
   }
 }
 
-export default BarBasic;
+export default BarBasic
 </script>
 <style lang="less" scoped>
 </style>
