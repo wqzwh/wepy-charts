@@ -34,6 +34,18 @@ class Index extends wepy.page {
     }, {
       id: 'pie',
       name: '饼图'
+    }, {
+      id: 'radar',
+      name: '雷达图'
+    }, {
+      id: 'funnel',
+      name: '漏斗图'
+    }, {
+      id: 'gauge',
+      name: '仪表盘'
+    }, {
+      id: 'scatter',
+      name: '散点图'
     }],
     fcharts: [{
       id: 'bar',

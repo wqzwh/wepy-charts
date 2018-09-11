@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -46,7 +46,13 @@
 				{
 					"id": -1,
 					"name": "bar",
-					"pathName": "pages/bar/index"
+					"pathName": "pages/bar/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "radar",
+					"pathName": "pages/e/radar/index"
 				}
 			]
 		}

@@ -32,6 +32,28 @@ wepy工程框架结合echarts使用，展示基本图表示例，目前柱状图
 
 <img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/pie.gif?raw=true" style="max-width:100%;">
 
+### 雷达图 - echarts
+
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/radar.gif?raw=true" style="max-width:100%;">
+
+
+### 漏斗图 - echarts
+
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/funnel.gif?raw=true" style="max-width:100%;">
+
+### 仪表盘 - echarts
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/gauge.gif?raw=true" style="max-width:100%;">
+
+
+### 散点图 - echarts
+
+不能使用`new echarts.graphic.RadialGradient`，否则会出现栈溢出问题
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/scatter.gif?raw=true" style="max-width:100%;">
+
 
 ### 柱状图 - f2
 

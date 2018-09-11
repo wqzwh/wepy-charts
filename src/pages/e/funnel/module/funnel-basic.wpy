@@ -1,0 +1,101 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="FunnelBasic" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy';
+import * as ec from '@/plugins/ec-canvas/echarts';
+import { EChartsMixin } from '@/mixins';
+import Tooltip from '@/components/tooltip';
+class FunnelBasic extends wepy.component {
+  components = {
+    Tooltip
+  };
+
+  mixins = [EChartsMixin];
+
+  data = {
+    canvasId: 'FunnelBasic',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      title: {
+        text: '漏斗图'
+      },
+      tooltip: {
+        trigger: 'item',
+      },
+      legend: {
+        data: ['展现', '点击', '访问', '咨询'],
+        orient: 'vertical',
+        x: 'right'
+      },
+      calculable: true,
+      series: [
+        {
+          name: '漏斗图',
+          type: 'funnel',
+          left: '10%',
+          top: 60,
+          bottom: 60,
+          width: '80%',
+          min: 0,
+          max: 100,
+          minSize: '0%',
+          maxSize: '100%',
+          sort: 'descending',
+          gap: 2,
+          label: {
+            normal: {
+              show: true,
+              position: 'inside'
+            },
+            emphasis: {
+              textStyle: {
+                fontSize: 20
+              },
+              formatter(d) {
+                return `${d.data.value}%`
+              }
+            }
+          },
+          data: [
+            { value: 60, name: '访问' },
+            { value: 40, name: '咨询' },
+            { value: 80, name: '点击' },
+            { value: 100, name: '展现' }
+          ]
+        }
+      ]
+    };
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default FunnelBasic;
+</script>
+<style lang="less" scoped>
+</style>

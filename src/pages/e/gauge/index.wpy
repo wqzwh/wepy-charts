@@ -1,0 +1,26 @@
+<template>
+  <view class='wrap'>
+    <GaugeBasic/>
+  </view>
+</template>
+<script>
+import GaugeBasic from './module/gauge-basic'
+import wepy from 'wepy'
+class Gauge extends wepy.page {
+  config = {
+    navigationBarTitleText: '仪表盘',
+  };
+
+  components = {
+    GaugeBasic,
+  }
+}
+
+export default Gauge;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

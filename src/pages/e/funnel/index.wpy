@@ -1,0 +1,29 @@
+<template>
+  <view class='wrap'>
+    <FunnelBasic/>
+    <FunnelCustomize/>
+  </view>
+</template>
+<script>
+import FunnelBasic from './module/funnel-basic'
+import FunnelCustomize from './module/funnel-customize'
+import wepy from 'wepy'
+class Funnel extends wepy.page {
+  config = {
+    navigationBarTitleText: '雷达图',
+  };
+
+  components = {
+    FunnelBasic,
+    FunnelCustomize
+  }
+}
+
+export default Funnel;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

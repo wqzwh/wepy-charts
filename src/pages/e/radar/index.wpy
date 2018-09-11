@@ -1,0 +1,26 @@
+<template>
+  <view class='wrap'>
+    <RadarBasic/>
+  </view>
+</template>
+<script>
+import RadarBasic from './module/radar-basic'
+import wepy from 'wepy'
+class Radar extends wepy.page {
+  config = {
+    navigationBarTitleText: '雷达图',
+  };
+
+  components = {
+    RadarBasic
+  }
+}
+
+export default Radar;
+</script>
+<style lang="less" scoped>
+</style>
+
+
+
+

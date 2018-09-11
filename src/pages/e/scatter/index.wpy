@@ -1,0 +1,22 @@
+<template>
+  <view class='wrap'>
+    <ScatterBasic/>
+  </view>
+</template>
+<script>
+import ScatterBasic from './module/scatter-basic'
+import wepy from 'wepy'
+class Scatter extends wepy.page {
+  config = {
+    navigationBarTitleText: '雷达图',
+  };
+
+  components = {
+    ScatterBasic
+  }
+}
+
+export default Scatter;
+</script>
+<style lang="less" scoped>
+</style>
