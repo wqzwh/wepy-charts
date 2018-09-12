@@ -1,0 +1,22 @@
+<template>
+  <view class='wrap'>
+    <HeatmapBasic />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import HeatmapBasic from './module/heatmap-basic'
+class Heatmap extends wepy.page {
+  config = {
+    navigationBarTitleText: '色块图',
+  };
+
+  components = {
+    HeatmapBasic,
+  }
+}
+
+export default Heatmap
+</script>
+<style lang="less" scoped>
+</style>

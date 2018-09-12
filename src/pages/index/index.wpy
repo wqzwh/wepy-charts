@@ -21,7 +21,7 @@
 import wepy from 'wepy'
 class Index extends wepy.page {
   config = {
-    navigationBarTitleText: '首页',
+    navigationBarTitleText: '图表集',
   };
 
   data = {
@@ -46,6 +46,9 @@ class Index extends wepy.page {
     }, {
       id: 'scatter',
       name: '散点图'
+    }, {
+      id: 'sunburst',
+      name: '旭日图'
     }],
     fcharts: [{
       id: 'bar',
@@ -56,7 +59,43 @@ class Index extends wepy.page {
     }, {
       id: 'pie',
       name: '饼图'
+    }, {
+      id: 'radar',
+      name: '雷达图'
+    }, {
+      id: 'gauge',
+      name: '仪表盘'
+    }, {
+      id: 'scatter',
+      name: '散点图'
+    }, {
+      id: 'k',
+      name: 'K线图'
+    }, {
+      id: 'polar',
+      name: '极坐标'
+    }, {
+      id: 'heatmap',
+      name: '色块图'
     }],
+    zdycanvas: [],
+  }
+
+  // 点击转发触发
+  onShareAppMessage(res) {
+    return {
+      title: '图表集',
+      path: `/pages/index/index`,
+      success: (res) => {
+        wx.showToast({
+          title: '分享成功！',
+          icon: 'success',
+          duration: 800
+        });
+      },
+      fail: (res) => {
+      }
+    }
   }
 
   methods = {

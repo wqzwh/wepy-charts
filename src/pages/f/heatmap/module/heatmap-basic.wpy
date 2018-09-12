@@ -1,0 +1,127 @@
+<template>
+  <view>
+    <view>基础使用</view>
+    <canvas
+      class="f2-canvas"
+      canvas-id="HeatmapBasic"
+      @init="init"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @longtap="press">
+    </canvas>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+let chart = null;
+class HeatmapBasic extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'HeatmapBasic',
+    opts: {
+      onInit: this.initChart,
+      cdata: [
+        { name: 0, day: 0, sales: 10 },
+        { name: 0, day: 1, sales: 19 },
+        { name: 0, day: 2, sales: 8 },
+        { name: 0, day: 3, sales: 24 },
+        { name: 0, day: 4, sales: 67 },
+        { name: 1, day: 0, sales: 92 },
+        { name: 1, day: 1, sales: 58 },
+        { name: 1, day: 2, sales: 78 },
+        { name: 1, day: 3, sales: 117 },
+        { name: 1, day: 4, sales: 48 },
+        { name: 2, day: 0, sales: 35 },
+        { name: 2, day: 1, sales: 15 },
+        { name: 2, day: 2, sales: 123 },
+        { name: 2, day: 3, sales: 64 },
+        { name: 2, day: 4, sales: 52 },
+        { name: 3, day: 0, sales: 72 },
+        { name: 3, day: 1, sales: 132 },
+        { name: 3, day: 2, sales: 114 },
+        { name: 3, day: 3, sales: 19 },
+        { name: 3, day: 4, sales: 16 },
+        { name: 4, day: 0, sales: 38 },
+        { name: 4, day: 1, sales: 5 },
+        { name: 4, day: 2, sales: 8 },
+        { name: 4, day: 3, sales: 117 },
+        { name: 4, day: 4, sales: 115 },
+        { name: 5, day: 0, sales: 88 },
+        { name: 5, day: 1, sales: 32 },
+        { name: 5, day: 2, sales: 12 },
+        { name: 5, day: 3, sales: 6 },
+        { name: 5, day: 4, sales: 120 },
+        { name: 6, day: 0, sales: 13 },
+        { name: 6, day: 1, sales: 44 },
+        { name: 6, day: 2, sales: 88 },
+        { name: 6, day: 3, sales: 98 },
+        { name: 6, day: 4, sales: 96 },
+        { name: 7, day: 0, sales: 31 },
+        { name: 7, day: 1, sales: 1 },
+        { name: 7, day: 2, sales: 82 },
+        { name: 7, day: 3, sales: 32 },
+        { name: 7, day: 4, sales: 30 },
+        { name: 8, day: 0, sales: 85 },
+        { name: 8, day: 1, sales: 97 },
+        { name: 8, day: 2, sales: 123 },
+        { name: 8, day: 3, sales: 64 },
+        { name: 8, day: 4, sales: 84 },
+        { name: 9, day: 0, sales: 47 },
+        { name: 9, day: 1, sales: 114 },
+        { name: 9, day: 2, sales: 31 },
+        { name: 9, day: 3, sales: 48 },
+        { name: 9, day: 4, sales: 91 }
+      ]
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    chart.source(this.cdata, {
+      name: {
+        type: 'cat',
+        values: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
+      },
+      day: {
+        type: 'cat',
+        values: ['Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.']
+      }
+    });
+
+    chart
+      .polygon()
+      .position('name*day')
+      .color('sales', '#BAE7FF-#1890FF-#0050B3')
+      .style({
+        lineWidth: 1,
+        stroke: '#fff'
+      })
+      .animate({
+        appear: {
+          animation: 'fadeIn',
+          duration: 800
+        }
+      });
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default HeatmapBasic;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

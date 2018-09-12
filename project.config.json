@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"appid": "wx5db8cf3c952e4b47",
-	"projectname": "wepy-echarts",
+	"projectname": "wepy-charts",
 	"miniprogramRoot": "./dist",
 	"libVersion": "2.2.3",
 	"condition": {

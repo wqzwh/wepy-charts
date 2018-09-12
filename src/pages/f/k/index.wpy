@@ -1,0 +1,22 @@
+<template>
+  <view class='wrap'>
+    <KBasic />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import KBasic from './module/k-basic'
+class K extends wepy.page {
+  config = {
+    navigationBarTitleText: 'K线图',
+  };
+
+  components = {
+    KBasic,
+  }
+}
+
+export default K
+</script>
+<style lang="less" scoped>
+</style>

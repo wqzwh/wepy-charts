@@ -1,5 +1,6 @@
 <template>
-  <cover-view class="ec-tooltip" style="left: {{lx + 'px'}}; top: {{ly + 'px'}}" hidden="{{!tooltip.length}}">
+  <cover-view hidden="{{!tooltip.length}}" class="ec-tooltip" style="left: {{lx + 'px'}}; top: {{ly + 'px'}}">
+    <!-- <cover-view class="close" @tap="close">X</cover-view> -->
     <cover-view class="item-tooltip-name">
       {{tooltip[0].name}}
     </cover-view>
@@ -15,9 +16,11 @@
 import wepy from 'wepy'
 class tooltip extends wepy.component {
   props = {
-    tooltip: Array,
-    default() {
-      return []
+    tooltip: {
+      type: Array,
+      default() {
+        return []
+      }
     },
     ly: {
       type: [String, Number],
@@ -26,6 +29,17 @@ class tooltip extends wepy.component {
     lx: {
       type: [String, Number],
       default: 0
+    },
+    show: {
+      type: Boolean,
+      default: false,
+      twoWay: true
+    }
+  }
+
+  methods = {
+    close() {
+      this.show = false
     }
   }
 }
@@ -58,6 +72,14 @@ export default tooltip;
     border-radius: 10rpx;
     width: 20rpx;
     height: 20rpx;
+  }
+
+  .close {
+    color: #fff;
+    font-size: 30rpx;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 }
 </style>

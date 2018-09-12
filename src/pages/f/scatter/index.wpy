@@ -1,22 +1,22 @@
 <template>
   <view class='wrap'>
-    <ScatterBasic/>
+    <ScatterBasic />
   </view>
 </template>
 <script>
-import ScatterBasic from './module/scatter-basic'
 import wepy from 'wepy'
+import ScatterBasic from './module/scatter-basic'
 class Scatter extends wepy.page {
   config = {
     navigationBarTitleText: '散点图',
   };
 
   components = {
-    ScatterBasic
+    ScatterBasic,
   }
 }
 
-export default Scatter;
+export default Scatter
 </script>
 <style lang="less" scoped>
 </style>

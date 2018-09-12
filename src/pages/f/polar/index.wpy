@@ -1,0 +1,22 @@
+<template>
+  <view class='wrap'>
+    <PolarBasic />
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+import PolarBasic from './module/polar-basic'
+class Polar extends wepy.page {
+  config = {
+    navigationBarTitleText: '极坐标',
+  };
+
+  components = {
+    PolarBasic,
+  }
+}
+
+export default Polar
+</script>
+<style lang="less" scoped>
+</style>

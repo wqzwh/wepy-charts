@@ -10,7 +10,7 @@ import FunnelCustomize from './module/funnel-customize'
 import wepy from 'wepy'
 class Funnel extends wepy.page {
   config = {
-    navigationBarTitleText: '雷达图',
+    navigationBarTitleText: '漏斗图',
   };
 
   components = {

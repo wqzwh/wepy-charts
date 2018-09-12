@@ -1,0 +1,22 @@
+<template>
+  <view class='wrap'>
+    <SunburstBasic/>
+  </view>
+</template>
+<script>
+import SunburstBasic from './module/sunburst-basic'
+import wepy from 'wepy'
+class Sunburst extends wepy.page {
+  config = {
+    navigationBarTitleText: '旭日图',
+  };
+
+  components = {
+    SunburstBasic
+  }
+}
+
+export default Sunburst;
+</script>
+<style lang="less" scoped>
+</style>

@@ -1,0 +1,370 @@
+<template>
+  <view>
+    <view>基础使用</view>
+    <canvas
+      class="f2-canvas"
+      canvas-id="KBasic"
+      @init="init"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+      @longtap="press">
+    </canvas>
+  </view>
+</template>
+<script>
+import wepy from 'wepy';
+import F2 from '@/plugins/f2-canvas/lib/f2';
+import { F2Mixin } from '@/mixins';
+let chart = null;
+class KBasic extends wepy.component {
+  mixins = [F2Mixin];
+
+  data = {
+    canvasId: 'KBasic',
+    opts: {
+      onInit: this.initChart,
+      cdata: [
+        {
+          time: '2015-09-02',
+          start: 6.2,
+          max: 6.84,
+          min: 5.98,
+          end: 5.99,
+          volumn: 1934.95,
+          money: 12225.68,
+          range: [6.2, 5.99, 6.84, 5.98],
+          trend: 1
+        },
+        {
+          time: '2015-09-07',
+          start: 6.19,
+          max: 6.45,
+          min: 6.09,
+          end: 6.2,
+          volumn: 1605.85,
+          money: 10091.26,
+          range: [6.19, 6.2, 6.45, 6.09],
+          trend: 0
+        },
+        {
+          time: '2015-09-08',
+          start: 6.26,
+          max: 6.7,
+          min: 6.01,
+          end: 6.64,
+          volumn: 1506.53,
+          money: 9556.54,
+          range: [6.26, 6.64, 6.7, 6.01],
+          trend: 0
+        },
+        {
+          time: '2015-09-09',
+          start: 6.76,
+          max: 7.03,
+          min: 6.65,
+          end: 6.93,
+          volumn: 2105.28,
+          money: 14426.76,
+          range: [6.76, 6.93, 7.03, 6.65],
+          trend: 0
+        },
+        {
+          time: '2015-09-10',
+          start: 6.7,
+          max: 7.17,
+          min: 6.65,
+          end: 6.86,
+          volumn: 2181.33,
+          money: 15169.4,
+          range: [6.7, 6.86, 7.17, 6.65],
+          trend: 0
+        },
+        {
+          time: '2015-09-11',
+          start: 6.87,
+          max: 7.01,
+          min: 6.68,
+          end: 6.81,
+          volumn: 1371.77,
+          money: 9370.49,
+          range: [6.87, 6.81, 7.01, 6.68],
+          trend: 1
+        },
+        {
+          time: '2015-09-14',
+          start: 6.98,
+          max: 7.06,
+          min: 6.13,
+          end: 6.13,
+          volumn: 1982.9,
+          money: 12989.01,
+          range: [6.98, 6.13, 7.06, 6.13],
+          trend: 1
+        },
+        {
+          time: '2015-09-15',
+          start: 5.81,
+          max: 6.09,
+          min: 5.52,
+          end: 5.52,
+          volumn: 1617.12,
+          money: 9248.69,
+          range: [5.81, 5.52, 6.09, 5.52],
+          trend: 1
+        },
+        {
+          time: '2015-09-16',
+          start: 5.58,
+          max: 6.07,
+          min: 5.4,
+          end: 6.07,
+          volumn: 1758.57,
+          money: 10132.25,
+          range: [5.58, 6.07, 6.07, 5.4],
+          trend: 0
+        },
+        {
+          time: '2015-09-17',
+          start: 6.1,
+          max: 6.34,
+          min: 5.8,
+          end: 5.83,
+          volumn: 2135.64,
+          money: 13039.56,
+          range: [6.1, 5.83, 6.34, 5.8],
+          trend: 1
+        },
+        {
+          time: '2015-09-18',
+          start: 6,
+          max: 6.1,
+          min: 5.81,
+          end: 6.02,
+          volumn: 1507.09,
+          money: 8999.44,
+          range: [6, 6.02, 6.1, 5.81],
+          trend: 0
+        },
+        {
+          time: '2015-09-21',
+          start: 5.83,
+          max: 6.32,
+          min: 5.83,
+          end: 6.31,
+          volumn: 1748.35,
+          money: 10807.66,
+          range: [5.83, 6.31, 6.32, 5.83],
+          trend: 0
+        },
+        {
+          time: '2015-09-22',
+          start: 6.35,
+          max: 6.4,
+          min: 6.15,
+          end: 6.25,
+          volumn: 1893.83,
+          money: 11901.51,
+          range: [6.35, 6.25, 6.4, 6.15],
+          trend: 1
+        },
+        {
+          time: '2015-09-23',
+          start: 6.18,
+          max: 6.32,
+          min: 6.02,
+          end: 6.12,
+          volumn: 1558.54,
+          money: 9631.38,
+          range: [6.18, 6.12, 6.32, 6.02],
+          trend: 1
+        },
+        {
+          time: '2015-09-24',
+          start: 6.16,
+          max: 6.32,
+          min: 6.1,
+          end: 6.27,
+          volumn: 1434.38,
+          money: 8920.88,
+          range: [6.16, 6.27, 6.32, 6.1],
+          trend: 0
+        },
+        {
+          time: '2015-09-25',
+          start: 6.23,
+          max: 6.28,
+          min: 5.85,
+          end: 5.96,
+          volumn: 1395.27,
+          money: 8465.95,
+          range: [6.23, 5.96, 6.28, 5.85],
+          trend: 1
+        },
+        {
+          time: '2015-09-28',
+          start: 5.86,
+          max: 6.13,
+          min: 5.85,
+          end: 6.07,
+          volumn: 952.45,
+          money: 5717.33,
+          range: [5.86, 6.07, 6.13, 5.85],
+          trend: 0
+        },
+        {
+          time: '2015-09-29',
+          start: 5.96,
+          max: 5.98,
+          min: 5.73,
+          end: 5.83,
+          volumn: 1047.42,
+          money: 6132.72,
+          range: [5.96, 5.83, 5.98, 5.73],
+          trend: 1
+        },
+        {
+          time: '2015-09-30',
+          start: 5.93,
+          max: 6.12,
+          min: 5.81,
+          end: 5.83,
+          volumn: 1459.64,
+          money: 8659.52,
+          range: [5.93, 5.83, 6.12, 5.81],
+          trend: 1
+        },
+        {
+          time: '2015-10-08',
+          start: 6.11,
+          max: 6.28,
+          min: 6,
+          end: 6.12,
+          volumn: 2197.23,
+          money: 13440.92,
+          range: [6.11, 6.12, 6.28, 6],
+          trend: 0
+        },
+        {
+          time: '2015-10-09',
+          start: 6.1,
+          max: 6.44,
+          min: 6.08,
+          end: 6.34,
+          volumn: 2664.04,
+          money: 16811.14,
+          range: [6.1, 6.34, 6.44, 6.08],
+          trend: 0
+        },
+        {
+          time: '2015-10-12',
+          start: 6.29,
+          max: 6.89,
+          min: 6.29,
+          end: 6.69,
+          volumn: 3147.58,
+          money: 20738.35,
+          range: [6.29, 6.69, 6.89, 6.29],
+          trend: 0
+        },
+        {
+          time: '2015-10-13',
+          start: 6.55,
+          max: 6.81,
+          min: 6.55,
+          end: 6.75,
+          volumn: 2299.83,
+          money: 15338.24,
+          range: [6.55, 6.75, 6.81, 6.55],
+          trend: 0
+        },
+        {
+          time: '2015-10-14',
+          start: 6.7,
+          max: 6.99,
+          min: 6.61,
+          end: 6.66,
+          volumn: 2496.38,
+          money: 16858.28,
+          range: [6.7, 6.66, 6.99, 6.61],
+          trend: 1
+        }
+      ]
+    }
+  };
+
+  initChart(canvas, width, height) {
+    chart = new F2.Chart({
+      el: canvas,
+      width,
+      height
+    });
+
+    chart.axis('time', {
+      label: function label(text, index, total) {
+        var cfg = {
+          textAlign: 'center'
+        };
+        // 第一个点左对齐，最后一个点右对齐，其余居中，只有一个点时左对齐
+        if (index === 0) {
+          cfg.textAlign = 'start';
+        }
+        if (index > 0 && index === total - 1) {
+          cfg.textAlign = 'end';
+        }
+        return cfg;
+      }
+    });
+    chart.source(this.cdata, {
+      range: {
+        tickCount: 5
+      },
+      time: {
+        tickCount: 3
+      }
+    });
+    chart.legend({
+      custom: true,
+      itemWidth: null,
+      items: [
+        {
+          name: '上涨',
+          marker: 'circle',
+          fill: '#FC674D'
+        },
+        {
+          name: '下降',
+          marker: 'circle',
+          fill: '#9AC2AB'
+        }
+      ]
+    });
+    chart.tooltip(false);
+    chart
+      .schema()
+      .position('time*range')
+      .color('trend', function(trend) {
+        return ['#FC674D', '#fff'][trend];
+      })
+      .shape('candle')
+      .style('trend', {
+        stroke: function stroke(val) {
+          if (val === 1) {
+            return '#9AC2AB';
+          }
+        }
+      });
+    chart.render();
+
+    return chart;
+  }
+}
+
+export default KBasic;
+</script>
+<style lang="less" scoped>
+.f2-canvas {
+  width: 100%;
+  height: 500rpx;
+}
+</style>

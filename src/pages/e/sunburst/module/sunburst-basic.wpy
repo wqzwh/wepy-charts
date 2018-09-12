@@ -1,0 +1,123 @@
+<template>
+  <canvas 
+    class="ec-canvas" 
+    canvas-id="SunburstBasic" 
+    style="width:100%;height:500rpx;display:block;"
+    @touchstart="touchStart"
+    @touchmove="touchMove"
+    @touchend="touchEnd"
+    @init="init">
+    <Tooltip :tooltip.sync="tooltip" :lx.sync="lx" :ly.sync="ly"/>
+  </canvas>
+</template>
+<script>
+import wepy from 'wepy';
+import * as ec from '@/plugins/ec-canvas/echarts';
+import { EChartsMixin } from '@/mixins';
+import Tooltip from '@/components/tooltip';
+class SunburstBasic extends wepy.component {
+  components = {
+    Tooltip
+  };
+
+  mixins = [EChartsMixin];
+
+  data = {
+    canvasId: 'SunburstBasic',
+    ec: {
+      onInit: this.initChart
+    },
+    tooltip: [],
+    lx: 0,
+    ly: 0
+  };
+
+  initChart(canvas, width, height, self) {
+    const chart = ec.init(canvas, null, {
+      width: width,
+      height: height
+    });
+    canvas.setChart(chart);
+
+    const option = {
+      series: {
+        type: 'sunburst',
+        data: [
+          {
+            name: 'Grandpa',
+            children: [
+              {
+                name: 'Uncle Leo',
+                value: 15,
+                children: [
+                  {
+                    name: 'Cousin Jack',
+                    value: 2
+                  },
+                  {
+                    name: 'Cousin Mary',
+                    value: 5,
+                    children: [
+                      {
+                        name: 'Jackson',
+                        value: 2
+                      }
+                    ]
+                  },
+                  {
+                    name: 'Cousin Ben',
+                    value: 4
+                  }
+                ]
+              },
+              {
+                name: 'Father',
+                value: 10,
+                children: [
+                  {
+                    name: 'Me',
+                    value: 5
+                  },
+                  {
+                    name: 'Brother Peter',
+                    value: 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'Nancy',
+            children: [
+              {
+                name: 'Uncle Nike',
+                children: [
+                  {
+                    name: 'Cousin Betty',
+                    value: 1
+                  },
+                  {
+                    name: 'Cousin Jenny',
+                    value: 2
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        radius: [0, '90%'],
+        label: {
+          rotate: 'radial'
+        }
+      }
+    };
+
+    chart.setOption(option);
+    return chart;
+  }
+}
+
+export default SunburstBasic;
+</script>
+<style lang="less" scoped>
+</style>
