@@ -79,6 +79,30 @@ wepy工程框架结合echarts使用，展示基本图表示例，目前柱状图
 
 <img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fpie.gif?raw=true" style="max-width:100%;">
 
+### 雷达图 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fradar.gif?raw=true" style="max-width:100%;">
+
+### 仪表盘 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fgauge.gif?raw=true" style="max-width:100%;">
+
+### 散点图 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fscatter.gif?raw=true" style="max-width:100%;">
+
+### K线图 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fk.gif?raw=true" style="max-width:100%;">
+
+### 极坐标 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fpolar.gif?raw=true" style="max-width:100%;">
+
+### 色块图 - f2
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fheatmap.gif?raw=true" style="max-width:100%;">
+
 ## 具体使用
 
 ### echarts使用
