@@ -6,6 +6,21 @@
 
 wepy工程框架结合echarts使用，展示基本图表示例，目前柱状图，折线图实现了tooltip功能，饼图暂时未能实现tooltip，后期加上（主要是目前echart在微信小程序中暂时不支持tooltip功能），以下示例均来自echart官网示例
 
+## 具体使用
+
+### echarts使用
+
+在项目中引入`mixins/echarts.js`，`plugins/ec-canvas`文件夹下的所有内容，如果需要开启`tooltip`请将`components\tooltip.wpy`复制到自己的项目中，这里的使用`cover-view`变相实现了`tooltip`的功能，经过测试有点卡顿，期待官网的支持。具体使用规范查看`pages/e`文件夹下具体示例即可。
+
+### f2使用
+
+在项目中引入`mixins/f2.js`，`plugins/f2-canvas`文件夹下的所有内容，具体使用规范查看`pages/f`文件夹下具体示例即可。
+
+
+## 小程序预览
+
+<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/tpj.jpg?raw=true" style="max-width:100%;">
+
 ### 柱状图 - echarts
 
 * 基础使用
@@ -102,18 +117,3 @@ wepy工程框架结合echarts使用，展示基本图表示例，目前柱状图
 ### 色块图 - f2
 
 <img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/fheatmap.gif?raw=true" style="max-width:100%;">
-
-## 具体使用
-
-### echarts使用
-
-在项目中引入`mixins/echarts.js`，`plugins/ec-canvas`文件夹下的所有内容，如果需要开启`tooltip`请将`components\tooltip.wpy`复制到自己的项目中，这里的使用`cover-view`变相实现了`tooltip`的功能，经过测试有点卡顿，期待官网的支持。具体使用规范查看`pages/e`文件夹下具体示例即可。
-
-### f2使用
-
-在项目中引入`mixins/f2.js`，`plugins/f2-canvas`文件夹下的所有内容，具体使用规范查看`pages/f`文件夹下具体示例即可。
-
-
-## 小程序预览
-
-<img src="https://github.com/wqzwh/wepy-echarts/blob/master/static/tpj.jpg?raw=true" style="max-width:100%;">
