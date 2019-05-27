@@ -17,6 +17,7 @@
   "author": "wangqi",
   "license": "MIT",
   "dependencies": {
+    "cryptiles": "^4.1.3",
     "lodash": "^4.17.11",
     "wepy": "^1.6.0",
     "wepy-async-function": "^1.4.4"
